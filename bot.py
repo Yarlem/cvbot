@@ -9,6 +9,7 @@ from aiogram.dispatcher.filters import Text
 from aiogram.dispatcher.filters import Command
 from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram.types import ParseMode
+from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove
 from aiogram.utils import executor
 from googleapiclient.discovery import build
 import os
@@ -61,7 +62,7 @@ async def get_object(message: types.Message, state: FSMContext):
 #Установка команд для бота
 @dp.message_handler(commands=['start'])
 async def send_welcome(message: types.Message):
-    await message.answer('Привет! \nЭто бот-приложение к резюме. \nВведите /help для получения списка команд')
+    await message.answer('Привет! \nЭто бот-приложение к резюме. \nВведите /help для получения списка команд', reply_markup=hotkeys)
 
 @dp.message_handler(commands=['help'])
 async def help_command(message: types.Message):
