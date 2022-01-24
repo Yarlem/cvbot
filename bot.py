@@ -22,13 +22,13 @@ dp = Dispatcher(bot, storage=storage)
 #Установка состояний
 class Form(StatesGroup):
     name = State()
-#Возможность отмены
+
+#Парсинг json файла для получения нужных данных от Youtube
 def saving(list):
     for i in list['items']:
         return(i['id']['videoId'])
 
 YT = build('youtube', 'v3', developerKey=api_key)
-  
 
 #Команда для поиска
 @dp.message_handler(commands=['find'], state=None)
@@ -49,22 +49,6 @@ async def get_object(message: types.Message, state: FSMContext):
     await message.answer(ytlink)
     await state.finish()
 
-#Обработка запроса через API Youtube
-#YT = build('youtube', 'v3', developerKey=api_key)
-#request = YT.search().list(part="snippet", maxResults=1, q=name)
-#response = request.execute()
-
-#def saving(list):
-    #for i in list['items']:
-        #return(i['id']['videoId'])
-
-#сохраняем итоговый результат в переменной
-#ytlink = 'https://www.youtube.com/watch?v='+saving(response) 
-
-
-
-
-
 #Установка команд для бота
 @dp.message_handler(commands=['start'])
 async def send_welcome(message: types.Message):
@@ -82,17 +66,8 @@ async def info_command(message: types.Message):
 
 @dp.message_handler(commands=['git'])
 async def git_command(message: types.Message):
-    await message.answer(' ВСТАВИТЬ ССЫЛКУ ')
+    await message.answer('https://github.com/Yarlem/cvbot')
 
-
-
-
-
-#добавь блок кода для каждой команды
-
-
-#Выкинуть на гит
-
-
+#Запуск бота
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True)
