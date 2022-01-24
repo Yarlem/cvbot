@@ -19,6 +19,15 @@ bot = Bot(token=TOKEN)
 storage=MemoryStorage()
 dp = Dispatcher(bot, storage=storage)
 
+#Создание кнопок с командами
+k1 = KeyboardButton('/find')
+k2 = KeyboardButton('/help')
+k3 = KeyboardButton('/info')
+k4 = KeyboardButton('/git')
+
+hotkeys=ReplyKeyboardMarkup(resize_keyboard=True)
+hotkeys.add(k1).insert(k2).add(k3).insert(k4)
+
 #Установка состояний
 class Form(StatesGroup):
     name = State()
